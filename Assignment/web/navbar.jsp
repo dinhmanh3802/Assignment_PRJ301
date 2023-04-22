@@ -28,7 +28,7 @@
     </head>
     <body>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <!-- Container wrapper -->
             <div class="container-fluid">
                 <!-- Toggle button -->
@@ -47,7 +47,7 @@
                 <!-- Collapsible wrapper -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Navbar brand -->
-                    <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                    <a class="navbar-brand mt-2 mt-lg-0" href="homepage.jsp">
                         <img
                             src="https://www.dau.edu/training/career-development/logistics/PublishingImages/DAU%20Images/DAU_DAU%20Logo_20170104.jpg"
                             height="50"
@@ -74,7 +74,7 @@
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
                     <!-- Icon -->
-                    
+
 
                     <!-- Notifications -->
                     <div class="dropdown">
@@ -106,14 +106,12 @@
                     </div>
                     <!-- Avatar -->
                     <div class="dropdown">
-                        <a
+                        <button
                             class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                            href="#"
+                            type="button"
                             id="navbarDropdownMenuAvatar"
-                            role="button"
                             data-mdb-toggle="dropdown"
                             aria-expanded="false"
-                            
                             >
                             <img
                                 src="https://www.pngfind.com/pngs/m/34-349693_circled-user-icon-transparent-background-username-icon-hd.png"
@@ -122,7 +120,7 @@
                                 alt="Black and White Portrait of a Man"
                                 loading="lazy"
                                 />
-                        </a>
+                        </button>
                         <ul
                             class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarDropdownMenuAvatar"
