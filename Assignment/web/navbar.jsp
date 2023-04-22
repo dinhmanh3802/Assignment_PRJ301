@@ -86,7 +86,7 @@
                             data-mdb-toggle="dropdown"
                             aria-expanded="false"
                             >
-                            <i class="fas fa-bell fa-3x" ></i>
+                            <i class="fas fa-bell fa-2x"style="font-size: 250%" ></i>
                             <span class="badge rounded-pill badge-notification bg-danger">1</span>
                         </a>
                         <ul
@@ -131,7 +131,7 @@
                                 <a class="dropdown-item" href="#">My profile</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" href="#">Change password</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#">Logout</a>
