@@ -53,6 +53,14 @@
         <jsp:include page="navbar.jsp" />
 
         <form>
+
+            <div class="d-flex align-items-center mb-4">
+                <h5 class="mr-3 mb-0">Avatar: &nbsp; </h5>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="avatarInput" name="avatar" accept="image/*">
+                    
+                </div>
+            </div>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
                 <input type="text" id="form6Example0" class="form-control" />
