@@ -1,6 +1,6 @@
 USE ASMPRJ301
 
-DROP TABLE FamilyTree
+DROP TABLE Genealogy
 DROP TABLE Person
 DROP TABLE [User]
 
@@ -23,9 +23,9 @@ CREATE TABLE Person (
 	FOREIGN KEY (ParentID) REFERENCES Person(ID)
 );
 
-CREATE TABLE FamilyTree(
+CREATE TABLE Genealogy(
 	ID INT PRIMARY KEY IDENTITY(1,1),
-	TreeName NVARCHAR(MAX),
+	GenealogyTitle NVARCHAR(MAX),
 	HeaderID INT,
 	FOREIGN KEY (HeaderID) REFERENCES Person(ID)
 );

@@ -4,20 +4,19 @@
  */
 package controller;
 
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.User;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author asus
  */
-public class signup extends HttpServlet {
+public class logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +35,10 @@ public class signup extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet signup</title>");
+            out.println("<title>Servlet logout</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet signup at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet logout at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +56,11 @@ public class signup extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        // Hủy đối tượng session
+        
+        session.invalidate();
+        response.sendRedirect("homepage.jsp");
     }
 
     /**
@@ -71,42 +74,7 @@ public class signup extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAO userDAO = new UserDAO();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repassword");
-        String email = request.getParameter("email");
-        String error ="";
-        
-        if (userDAO.getUserByUsername(username)!=null) {
-            error += "- Username existed!<br>";
-        }
-        
-        if (username == null || username.equals("")) {
-            error += "- Username can't not null!<br>";
-        }
-        if (password == null || password.equals("")) {
-            error += "- Password can't not null!<br>";
-        }
-        if (!password.equals(repassword)) {
-            error += "- Re-password must be same!<br>";
-        }
-        if (email == null || email.equals("")) {
-            error += "- Email can't not null!<br>";
-        }
-        if(error.equals("")){
-            User user = new User(username, password, email);
-  
-            
-            userDAO.insert(user);
-            response.sendRedirect("login.jsp");
-        }
-        else{
-            request.setAttribute("error", error);
-            request.getRequestDispatcher("signup.jsp").forward(request, response);
-            
-            
-        }
+        processRequest(request, response);
     }
 
     /**
