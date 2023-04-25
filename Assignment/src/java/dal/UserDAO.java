@@ -44,7 +44,6 @@ public class UserDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 user = new User(rs.getString("Username"), rs.getString("Password"), rs.getString("EmailAddress"));
-                
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -105,7 +104,7 @@ public class UserDAO extends DBContext {
 
     public static void main(String[] args) {
         UserDAO c = new UserDAO();
-        System.out.println(c.getUserByUsername("test1").getPassword());
+        System.out.println(c.getUserByUsername("test").getUsername() == null );
     }
 
 }

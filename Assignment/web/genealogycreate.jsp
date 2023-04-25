@@ -114,7 +114,7 @@
 
             <!-- Message input -->
             <div class="form-outline mb-4">
-                <textarea class="form-control" id="form6Example7" name="Discription" rows="4"></textarea>
+                <input type="text" class="form-control" name="discription" ></input>
                 <label class="form-label" for="form6Example7">Description</label>
             </div>
 

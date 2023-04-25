@@ -25,7 +25,7 @@ public class PersonDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Person s = new Person(rs.getString("Fullname"), rs.getString("DateOfBirth"), rs.getString("DateOfDeath"), rs.getString("Occupation"), rs.getString("Address"),rs.getString("PhoneNumber"),rs.getString("Description"), rs.getInt("ParentID"));
+                Person s = new Person(rs.getString("Fullname"), rs.getString("DateOfBirth"), rs.getString("DateOfDeath"), rs.getString("Occupation"), rs.getString("Address"), rs.getString("PhoneNumber"), rs.getString("Description"), rs.getInt("ParentID"));
                 list.add(s);
             }
         } catch (Exception e) {
@@ -35,77 +35,74 @@ public class PersonDAO extends DBContext {
         return list;
     }
 
-    public Person getPersonByPersonname(String personname) {
-        Person person = new Person();
-        String sql = "SELECT * FROM [Person] WHERE Personname = ?";
+//    public Person getPersonByPersonname(String personname) {
+//        Person person = new Person();
+//        String sql = "SELECT * FROM [Person] WHERE Personname = ?";
+//        try {
+//            PreparedStatement st = connection.prepareStatement(sql);
+//            st.setString(1, personname);
+//            ResultSet rs = st.executeQuery();
+//            while (rs.next()) {
+//                person = new Person(rs.getString("Personname"), rs.getString("Password"), rs.getString("EmailAddress"));
+//                
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//
+//        return person;
+//    }
+    public int searchHeaderPersonID(String name) {
+        String sql = "SELECT ID FROM [Person] WHERE ParentID = 0 AND Fullname = ?";
+        int ID = 0;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, personname);
+            st.setString(1, name);
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                person = new Person(rs.getString("Personname"), rs.getString("Password"), rs.getString("EmailAddress"));
-                
+            if (rs.next()) { 
+                ID = rs.getInt("ID");
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        return person;
+        return ID;
     }
 
-    public void chagePassword(String personname, String newPassword) {
-        String sql = "UPDATE [Person]\n"
-                + "SET [Password] = ?\n"
-                + "WHERE Personname = ?;";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-
-            st.setString(1, newPassword);
-            st.setString(2, personname);
-            
-            st.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
-    public void insert(Person u) {
+    public void insert(Person p) {
         String sql = "INSERT INTO [dbo].[Person]\n"
-                + "           ([Personname]\n"
-                + "           ,[Password]\n"
-                + "           ,[EmailAddress]) VALUES (?,?,?)";
+                + "           ([Fullname]\n"
+                + "           ,[DateOfBirth]\n"
+                + "           ,[DateOfDeath]\n"
+                + "           ,[Occupation]\n"
+                + "           ,[Address]\n"
+                + "           ,[PhoneNumber]\n"
+                + "           ,[Description]\n"
+                + "           ,[ParentID])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
 
-            st.setString(1, u.getPersonname());
-            st.setString(2, u.getPassword());
-            st.setString(3, u.getEmailaddress());
+            st.setString(1, p.getFullname());
+            st.setString(2, p.getDateOfBirth());
+            st.setString(3, p.getDateOfDeath());
+            st.setString(4, p.getOccupation());
+            st.setString(5, p.getAddress());
+            st.setString(6, p.getPhoneNumber());
+            st.setString(7, p.getDescription());
+            st.setInt(8, p.getParentID());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
-    }
-
-    public boolean loginCheck(String personname, String password) {
-        String sql = "SELECT * FROM [Person] WHERE Personname = ? AND [Password] = ?";
-        Person person = null;
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, personname);
-            st.setString(2, password);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                person = new Person(rs.getString("Personname"), rs.getString("Password"), rs.getString("EmailAddress"));
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return (person != null);
     }
 
     public static void main(String[] args) {
         PersonDAO c = new PersonDAO();
-        System.out.println(c.getPersonByPersonname("test1").getPassword());
+        Person p = new Person("fgh", "", "", "", "", "", "",0);
+        c.insert(p);
+        //System.out.println(c.searchHeaderPersonID("sadsa"));
+
     }
 
 }

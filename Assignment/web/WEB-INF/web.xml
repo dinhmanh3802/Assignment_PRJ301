@@ -20,6 +20,10 @@
         <servlet-name>creategenealogy</servlet-name>
         <servlet-class>controller.creategenealogy</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>edit</servlet-name>
+        <servlet-class>controller.edit</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>creategenealogy</servlet-name>
         <url-pattern>/creategenealogy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>edit</servlet-name>
+        <url-pattern>/edit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -76,12 +76,11 @@ public class signup extends HttpServlet {
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
         String email = request.getParameter("email");
-        String error ="";
-        
-        if (userDAO.getUserByUsername(username)!=null) {
+        String error = "";
+
+        if (userDAO.getUserByUsername(username).getUsername() != null) {
             error += "- Username existed!<br>";
         }
-        
         if (username == null || username.equals("")) {
             error += "- Username can't not null!<br>";
         }
@@ -94,18 +93,14 @@ public class signup extends HttpServlet {
         if (email == null || email.equals("")) {
             error += "- Email can't not null!<br>";
         }
-        if(error.equals("")){
+        if (error.equals("")) {
             User user = new User(username, password, email);
-  
-            
             userDAO.insert(user);
             response.sendRedirect("login.jsp");
-        }
-        else{
+        } else {
             request.setAttribute("error", error);
             request.getRequestDispatcher("signup.jsp").forward(request, response);
-            
-            
+
         }
     }
 
