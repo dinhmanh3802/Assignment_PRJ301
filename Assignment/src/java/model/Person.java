@@ -4,6 +4,11 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  *
  * @author asus
@@ -126,8 +131,6 @@ public class Person {
     public void setParentID(int parentID) {
         this.parentID = parentID;
     }
-    
-    
-    
+
     
 }
