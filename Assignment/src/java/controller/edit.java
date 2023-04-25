@@ -60,13 +60,13 @@ public class edit extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("headerID") != null) {
-            int headerID = Integer.parseInt(request.getParameter("headerid"));
+            int headerID = Integer.parseInt(request.getParameter("headerID"));
             request.setAttribute("headerID", headerID);
             PersonDAO personDAO = new PersonDAO();
-            List<Person> list = personDAO.getAll();
+            List<Person> list = personDAO.getAll(); 
             request.setAttribute("list", list);
             request.getRequestDispatcher("genealogy.jsp").forward(request, response);
-
+            
             // Tiếp tục thực hiện các xử lý với giá trị headerID
         } else {
             response.sendRedirect("genealogycreate.jsp");

@@ -99,8 +99,8 @@ public class PersonDAO extends DBContext {
 
     public static void main(String[] args) {
         PersonDAO c = new PersonDAO();
-        Person p = new Person("fgh", "", "", "", "", "", "",0);
-        c.insert(p);
+        List<Person> list= c.getAll();
+        System.out.println(list);
         //System.out.println(c.searchHeaderPersonID("sadsa"));
 
     }
