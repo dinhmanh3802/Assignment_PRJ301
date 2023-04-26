@@ -52,7 +52,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
 
-        <form>
+        <form action="addperson" method="post">
 
             <div class="d-flex align-items-center mb-4">
                 <h5 class="mr-3 mb-0">Avatar: &nbsp; </h5>
@@ -63,19 +63,19 @@
             </div>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
-                <input type="text" id="form6Example0" class="form-control" />
+                <input type="text" id="form6Example0" name="fullname"class="form-control" />
                 <label class="form-label" for="form6Example3">Fullname</label>
             </div>
             <div class="row mb-4">
                 <div class="col">
                     <div class="form-outline">
-                        <input type="date" id="form6Example1" class="form-control" />
+                        <input type="date" id="form6Example1" name="dob"class="form-control" />
                         <label class="form-label" for="form6Example1">Date of birth</label>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-outline">
-                        <input type="date" id="form6Example2" class="form-control" />
+                        <input type="date" id="form6Example2" name="dod"class="form-control" />
                         <label class="form-label" for="form6Example2">Date of death</label>
                     </div>
                 </div>
@@ -83,29 +83,33 @@
 
             <!-- Text input -->
             <div class="form-outline mb-4">
-                <input type="text" id="form6Example3" class="form-control" />
+                <input type="text" id="form6Example3" name="occupation"class="form-control" />
                 <label class="form-label" for="form6Example3">Occupation</label>
             </div>
 
             <!-- Text input -->
             <div class="form-outline mb-4">
-                <input type="text" id="form6Example4" class="form-control" />
+                <input type="text" id="form6Example4"name="address" class="form-control" />
                 <label class="form-label" for="form6Example4">Address</label>
             </div>
 
 
             <!-- Number input -->
             <div class="form-outline mb-4">
-                <input type="number" id="form6Example6" class="form-control" />
+                <input type="number" id="form6Example6" name="phonenumber"class="form-control" />
                 <label class="form-label" for="form6Example6">Phone number</label>
             </div>
 
             <!-- Message input -->
             <div class="form-outline mb-4">
-                <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+                <input type="text" class="form-control" name="description" ></input>
                 <label class="form-label" for="form6Example7">Description</label>
             </div>
-
+            
+            <div hidden class="form-outline mb-4">
+                <input type="text" value="<%= request.getParameter("genealogy")%>" class="form-control" name="genealogyid" ></input>
+                
+            </div>
 
 
             <!-- Submit button -->

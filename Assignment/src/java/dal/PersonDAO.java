@@ -77,7 +77,7 @@ public class PersonDAO extends DBContext {
                 + "           ,[Address]\n"
                 + "           ,[PhoneNumber]\n"
                 + "           ,[Description]\n"
-                + "           ,[ParentID])\n"
+                + "           ,[GenealogyID])\n"
                 + "     VALUES\n"
                 + "           (?,?,?,?,?,?,?,?)";
         try {
@@ -90,7 +90,7 @@ public class PersonDAO extends DBContext {
             st.setString(5, p.getAddress());
             st.setString(6, p.getPhoneNumber());
             st.setString(7, p.getDescription());
-            st.setInt(8, p.getParentID());
+            st.setInt(8, p.getGenealogyID());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -105,4 +105,33 @@ public class PersonDAO extends DBContext {
 
     }
 
+    public List<Person> getPersonInGenealogy(int id) {
+        List<Person> list = new ArrayList<>();
+        String sql = "SELECT * FROM [Person] WHERE GenealogyID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Person s = new Person(rs.getInt("ID") ,rs.getString("Fullname"), rs.getString("DateOfBirth"), rs.getString("DateOfDeath"), rs.getString("Occupation"), rs.getString("Address"), rs.getString("PhoneNumber"), rs.getString("Description"), rs.getInt("ParentID"), rs.getInt("GenealogyID"));
+                list.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+
+    public void delete(int id){
+         String sql = "DELETE FROM Person WHERE ID = ?";
+         try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+             System.out.println(e);
+        }
+    }
+    
 }

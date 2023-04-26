@@ -24,6 +24,26 @@
         <servlet-name>edit</servlet-name>
         <servlet-class>controller.edit</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>genealogyinfo</servlet-name>
+        <servlet-class>controller.genealogyinfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deletegenealogy</servlet-name>
+        <servlet-class>controller.deletegenealogy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updategenealogy</servlet-name>
+        <servlet-class>controller.updategenealogy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addperson</servlet-name>
+        <servlet-class>controller.addperson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deletepeson</servlet-name>
+        <servlet-class>controller.deletepeson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -47,6 +67,26 @@
     <servlet-mapping>
         <servlet-name>edit</servlet-name>
         <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>genealogyinfo</servlet-name>
+        <url-pattern>/genealogyinfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletegenealogy</servlet-name>
+        <url-pattern>/deletegenealogy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updategenealogy</servlet-name>
+        <url-pattern>/updategenealogy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addperson</servlet-name>
+        <url-pattern>/addperson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletepeson</servlet-name>
+        <url-pattern>/deletepeson</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

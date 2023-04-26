@@ -13,14 +13,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Genealogy;
-import model.Person;
 
 /**
  *
  * @author asus
  */
-public class creategenealogy extends HttpServlet {
+public class deletepeson extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +35,10 @@ public class creategenealogy extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet creategenealogy</title>");  
+            out.println("<title>Servlet deletepeson</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet creategenealogy at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet deletepeson at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,8 +55,17 @@ public class creategenealogy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+          String id_raw = request.getParameter("id");
+        try {
+            int id = Integer.parseInt(id_raw);
+            PersonDAO std = new PersonDAO();
+            std.delete(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        response.sendRedirect("updategenealogy?id=" + request.getParameter("genealogyid") );
     } 
+    
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -70,30 +77,7 @@ public class creategenealogy extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        if(request.getParameter("fullname") == "" || request.getParameter("genealogytitle") == ""){
-            response.sendRedirect("genealogycreate.jsp");
-        }else{
-        
-        String fullname = request.getParameter("fullname");
-        String dateOfBirth = request.getParameter("dateofbirth");
-        String dateOfDeath = request.getParameter("dateofdeath");
-        String occupation = request.getParameter("occupation");
-        String address = request.getParameter("address");
-        String phoneNumber = request.getParameter("phonenumber");
-        String description = request.getParameter("discription");
-        
-        PersonDAO personDAO = new PersonDAO();
-        Person person = new Person(fullname,dateOfBirth,dateOfDeath,occupation,address,phoneNumber,description,0);
-        personDAO.insert(person);
-        
-        int headerID = personDAO.searchHeaderPersonID(fullname);
-        
-        GenealogyDAO genealogyDAO = new GenealogyDAO();
-        String genealogyTitle = request.getParameter("genealogytitle");
-        Genealogy genegoly = new Genealogy(genealogyTitle, headerID);
-        genealogyDAO.insert(genegoly);
-        response.sendRedirect("edit?headerID=" + headerID);
-        }
+        processRequest(request, response);
     }
 
     /** 

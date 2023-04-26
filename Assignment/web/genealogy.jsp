@@ -4,52 +4,54 @@
     Author     : asus
 --%>
 <%@page import ="dal.PersonDAO"%>
-<%@page import ="dal.PersonManagement"%>
 <%@page import ="model.Genealogy"%>
 <%@page import="model.Person"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Genealogy</title>
-    </head>
-    <style>
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-left: 20px;
-        }
-    </style>
-    <body>
-
-        <h1>Tree View</h1>
-        <ul>
-            <%
-            PersonDAO pD = new PersonDAO();    
-            PersonManagement pm = new PersonManagement();
-            List<Person> persons = pm.sortPersons(pD.getAll());
-            for (Person person : persons) {
-                if (person.getParentID() == 0) {
-                    out.print("<li>" + person.getFullname() + "</li>");
-                    List<Person> children = new ArrayList<>();
-                    pm.findChildren(persons, person, children);
-                    if (!children.isEmpty()) {
-                        out.print("<ul>");
-                        for (Person child : children) {
-                            out.print("<li>" + child.getFullname() + "</li>");
-                        }
-                        out.print("</ul>");
-                    }
+        <title>Student Info</title>
+        <script type="text/javascript">
+            function doDeleteAsk(id) {
+                if (confirm("Are you sure to delete it ?")) {
+                    window.location = "deletegenealogy?id=" + id;
                 }
             }
-            %>
-        </ul>
-        <h1>hehe</h1>
+        </script>
+    </head>
+    <body>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>                              
+                </tr>
+            </thead>
+            <tbody>
+                <% 
+                    List<Genealogy> li = (List<Genealogy>)request.getAttribute("list");
+                    if(li!=null){
+                    for(Genealogy s :li){ 
+                %>
+                <tr>
+                    <td><%= s.getID()%></td>
+                    <td><%= s.getGenealogyTitle()%></td>
+                    
+                  
+                    <td><a href="updategenealogy?id=<%= s.getID()%>">Update</a> &nbsp; <a href = "#" onclick="doDeleteAsk(<%= s.getID()%>)">Delete</a></td>
+                </tr>             
+                <%}}%>
+            </tbody>
+        </table>
+        <a href="create.jsp"><strong>Create</strong></a> 
+
+
+
     </body>
 </html>

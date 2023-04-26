@@ -22,7 +22,7 @@ public class GenealogyDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Genealogy s = new Genealogy(rs.getString("Genealogytitle"), rs.getInt("HeaderID"));
+                Genealogy s = new Genealogy(rs.getInt("ID"), rs.getString("Genealogytitle"));
                 list.add(s);
             }
         } catch (Exception e) {
@@ -40,26 +40,23 @@ public class GenealogyDAO extends DBContext {
             st.setString(1, genealogytitle);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                genealogy = new Genealogy(rs.getString("Genealogytitle"), rs.getInt("HeaderID"));
-                
+                genealogy = new Genealogy(rs.getString("Genealogytitle"));
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-
         return genealogy;
     }
 
 
     public void insert(Genealogy u) {
         String sql = "INSERT INTO [dbo].[Genealogy]\n"
-                + "           ([Genealogytitle]\n"
-                + "           ,[HeaderID]) VALUES (?,?)";
+                + "           ([Genealogytitle] VALUES (?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
 
             st.setString(1, u.getGenealogyTitle());
-            st.setInt(2, u.getHeaderID());
+    
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -69,8 +66,19 @@ public class GenealogyDAO extends DBContext {
     
     public static void main(String[] args) {
         GenealogyDAO c = new GenealogyDAO();
-        Genealogy u = new Genealogy("TEN",2);
+        Genealogy u = new Genealogy("TEN");
         c.insert(u);
+    }
+
+    public void delete(int id){
+         String sql = "DELETE FROM Genealogy WHERE ID = ?";
+         try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+             System.out.println(e);
+        }
     }
 
 }

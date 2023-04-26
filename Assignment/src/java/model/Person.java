@@ -23,6 +23,40 @@ public class Person {
     private String phoneNumber;
     private String description;
     private int parentID;
+    private int genealogyID;
+
+    public int getGenealogyID() {
+        return genealogyID;
+    }
+
+    public void setGenealogyID(int genealogyID) {
+        this.genealogyID = genealogyID;
+    }
+
+    public Person(String fullname, String dateOfBirth, String dateOfDeath, String occupation, String address, String phoneNumber, String description, int parentID, int genealogyID) {
+        this.fullname = fullname;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfDeath = dateOfDeath;
+        this.occupation = occupation;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.parentID = parentID;
+        this.genealogyID = genealogyID;
+    }
+
+    public Person(int ID, String fullname, String dateOfBirth, String dateOfDeath, String occupation, String address, String phoneNumber, String description, int parentID, int genealogyID) {
+        this.ID = ID;
+        this.fullname = fullname;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfDeath = dateOfDeath;
+        this.occupation = occupation;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.parentID = parentID;
+        this.genealogyID = genealogyID;
+    }
 
     public Person() {
     }
@@ -39,7 +73,7 @@ public class Person {
         this.parentID = parentID;
     }
 
-    public Person(String fullname, String dateOfBirth, String dateOfDeath, String occupation, String address, String phoneNumber, String description, int parentID) {
+    public Person(String fullname, String dateOfBirth, String dateOfDeath, String occupation, String address, String phoneNumber, String description, int genealogyid) {
         this.fullname = fullname;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
@@ -47,7 +81,7 @@ public class Person {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.description = description;
-        this.parentID = parentID;
+        this.genealogyID = genealogyid;
     }
 
     public Person(String fullname, String dateOfBirth, String dateOfDeath, String occupation, String address, String phoneNumber, String description) {

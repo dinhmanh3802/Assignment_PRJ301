@@ -11,21 +11,14 @@ package model;
 public class Genealogy {
     private int ID; 
     private String genealogyTitle;
-    private int headerID;
 
     
     public Genealogy() {
     }
 
-    public Genealogy(String genealogyTitle, int headerID) {
-        this.genealogyTitle = genealogyTitle;
-        this.headerID = headerID;
-    }
-
-    public Genealogy(int ID, String genealogyTitle, int headerID) {
+    public Genealogy(int ID, String genealogyTitle) {
         this.ID = ID;
         this.genealogyTitle = genealogyTitle;
-        this.headerID = headerID;
     }
 
     public int getID() {
@@ -44,21 +37,11 @@ public class Genealogy {
         this.genealogyTitle = genealogyTitle;
     }
 
-    public int getHeaderID() {
-        return headerID;
-    }
-
-    public void setHeaderID(int headerID) {
-        this.headerID = headerID;
-    }
-
+    
     public Genealogy(String genealogyTitle) {
         this.genealogyTitle = genealogyTitle;
     }
 
-    public Genealogy(int headerID) {
-        this.headerID = headerID;
-    }
 
     
     
