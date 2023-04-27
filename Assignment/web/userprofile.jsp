@@ -50,7 +50,7 @@
                                             <div class="d-flex flex-row align-items-center mb-4">
                                                 <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                                 <div class="form-outline flex-fill mb-0">
-                                                    <input type="text"  class="form-control" readonly value="<%= (String)session.getAttribute("password") %>" />
+                                                    <input type="password"  class="form-control" readonly value="<%= (String)session.getAttribute("password") %>" />
                                                     <label class="form-label" for="form3Example4c">Your password:</label>
                                                 </div>
                                             </div>
