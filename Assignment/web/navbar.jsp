@@ -55,16 +55,21 @@
                             loading="lazy"
                             />
                     </a>
+                    <% 
+
+                // Lấy giá trị của thuộc tính "username" từ đối tượng session
+                if(session.getAttribute("username")!=null){
+                %>
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="genealogycreate.jsp">GENEALOGY-CREATE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Team</a>
+                            <a class="nav-link" href="searching.jsp">SEARCHING</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Projects</a>
+                            <a class="nav-link" href="#">PROJECTS</a>
                         </li>
                     </ul>
                     <!-- Left links -->
@@ -75,11 +80,7 @@
 
 
 
-                <% 
-
-                // Lấy giá trị của thuộc tính "username" từ đối tượng session
-                if(session.getAttribute("username")!=null){
-                %>
+                
 
                 <!-- Ðã dang nhap -->
                 <div class="d-flex align-items-center">
@@ -148,23 +149,30 @@
                     </div>
                 </div>
                 <%}else{%>
+                <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        
+                    </ul>
+                    <!-- Left links -->
+                </div>
+                <!-- Collapsible wrapper -->
                 <!-- Chua dang nhap -->
                 <div class="d-flex align-items-center">
                     <a
-                            class="h4 link-secondary me-3 hidden-arrow"
-                            href="login.jsp "
-                            role="button" 
-                            >
-                            Sign in
-                        </a>
-                    
+                        class="h4 link-secondary me-3 hidden-arrow"
+                        href="login.jsp "
+                        role="button" 
+                        >
+                        Sign in
+                    </a>
+
                     <a
-                            class="h4 link-secondary me-3 hidden-arrow"
-                            href="signup.jsp "
-                            role="button"
-                            >
-                            Sign up
-                        </a>
+                        class="h4 link-secondary me-3 hidden-arrow"
+                        href="signup.jsp "
+                        role="button"
+                        >
+                        Sign up
+                    </a>
                     <!-- Notifications -->
                     <div>
 

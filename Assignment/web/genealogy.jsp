@@ -24,34 +24,105 @@
                 }
             }
         </script>
+        <style>
+    body{
+        background-image: url('https://free.vector6.com/wp-content/uploads/2020/07/Hoa-tiet-nen-dep-Vector.jpg');
+        background-size: cover;
+        background-position: center center;
+        opacity: 1; /* độ mờ của hình nền, giá trị từ 0 đến 1 */  
+    }
+    
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        border: 1px solid black;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: black;
+        border: 1px solid black;
+    }
+
+    .genealogy-table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .genealogy-table th, .genealogy-table td {
+        padding: 10px;
+        text-align: center;
+        background-color: white;
+        color: #333;
+        border: 1px solid #ccc;
+    }
+
+    .genealogy-table th {
+        background-color: #f2f2f2;
+    }
+
+    .genealogy-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .btn-update, .btn-delete {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 5px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-update:hover, .btn-delete:hover {
+        background-color: #3e8e41;
+    }
+</style>
+
     </head>
     <body>
-        <table border="1">
+         <jsp:include page="navbar.jsp" />
+         
+         <table class="genealogy-table" style="margin-top: 100px">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Title</th>                              
+                  
+                    <th>Title</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <% 
-                    List<Genealogy> li = (List<Genealogy>)request.getAttribute("list");
-                    if(li!=null){
-                    for(Genealogy s :li){ 
+                  List<Genealogy> li = (List<Genealogy>) request.getAttribute("list");
+                  if (li != null) {
+                    for (Genealogy s : li) { 
                 %>
                 <tr>
-                    <td><%= s.getID()%></td>
-                    <td><%= s.getGenealogyTitle()%></td>
-                    
-                  
-                    <td><a href="updategenealogy?id=<%= s.getID()%>">Update</a> &nbsp; <a href = "#" onclick="doDeleteAsk(<%= s.getID()%>)">Delete</a></td>
+                   
+                    <td><%= s.getGenealogyTitle() %></td>
+                    <td>
+                        <a href="updategenealogy?id=<%= s.getID() %>" class="btn-update">View</a>
+                        
+                    </td>
                 </tr>             
-                <%}}%>
+                <% } } %>
             </tbody>
         </table>
-        <a href="create.jsp"><strong>Create</strong></a> 
 
-
+            <jsp:include page="footer.jsp" />
+        <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+        ></script>  
 
     </body>
 </html>

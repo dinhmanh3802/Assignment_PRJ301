@@ -17,10 +17,6 @@
         <servlet-class>controller.changepassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>creategenealogy</servlet-name>
-        <servlet-class>controller.creategenealogy</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>edit</servlet-name>
         <servlet-class>controller.edit</servlet-class>
     </servlet>
@@ -44,6 +40,18 @@
         <servlet-name>deletepeson</servlet-name>
         <servlet-class>controller.deletepeson</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateperson</servlet-name>
+        <servlet-class>controller.updateperson</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>creategenealogy</servlet-name>
+        <servlet-class>controller.creategenealogy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>searching</servlet-name>
+        <servlet-class>controller.searching</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
@@ -59,10 +67,6 @@
     <servlet-mapping>
         <servlet-name>changepassword</servlet-name>
         <url-pattern>/changepassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>creategenealogy</servlet-name>
-        <url-pattern>/creategenealogy</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>edit</servlet-name>
@@ -87,6 +91,18 @@
     <servlet-mapping>
         <servlet-name>deletepeson</servlet-name>
         <url-pattern>/deletepeson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateperson</servlet-name>
+        <url-pattern>/updateperson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>creategenealogy</servlet-name>
+        <url-pattern>/creategenealogy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searching</servlet-name>
+        <url-pattern>/searching</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

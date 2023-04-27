@@ -33,6 +33,19 @@ public class Person {
         this.genealogyID = genealogyID;
     }
 
+    public Person(int ID, String fullname, String dateOfBirth, String dateOfDeath, String occupation, String address, String phoneNumber, String description) {
+        this.ID = ID;
+        this.fullname = fullname;
+        this.dateOfBirth = dateOfBirth;
+        this.dateOfDeath = dateOfDeath;
+        this.occupation = occupation;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+    }
+
+  
+
     public Person(String fullname, String dateOfBirth, String dateOfDeath, String occupation, String address, String phoneNumber, String description, int parentID, int genealogyID) {
         this.fullname = fullname;
         this.dateOfBirth = dateOfBirth;

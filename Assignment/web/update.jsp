@@ -3,7 +3,8 @@
     Created on : Apr 22, 2023, 11:18:02 AM
     Author     : asus
 --%>
-
+<%@page import ="model.Person"%>
+<%@page import ="dal.PersonDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -62,10 +63,15 @@
     <body>
         <jsp:include page="navbar.jsp" />
 
+        <%
+            PersonDAO pd = new PersonDAO();
+            Person p = pd.findPerson(Integer.parseInt(request.getParameter("id")));
+        %>
+        
         <div class="container" style="width: 60%;">
             <div class="row" >
 
-                <div  " >
+                <form action="updateperson" method="post">
 
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-align: center">  <h1 style="font-size: 50px"><b>Personal Information</b></h1></div>
@@ -88,19 +94,19 @@
 
 
                                     <h3>Fullname:</h3><div class="form-outline mb-4">
-                                        <input type="text" id="form6Example0" class="form-control" />
+                                        <input type="text" name="fullname" value="<%= p.getFullname() %>" id="form6Example0" class="form-control" />
                                         
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col">
                                             <h3>Date of birth:</h3><div class="form-outline">
-                                                <input type="date" id="form6Example1" class="form-control" />
+                                                <input type="date" name="dob" value="<%= p.getDateOfBirth()%>" id="form6Example1" class="form-control" />
                                                 
                                             </div>
                                         </div>
                                         <div class="col">
                                             <h3>Date of death:</h3><div class="form-outline">
-                                                <input type="date" id="form6Example2" class="form-control" />
+                                                <input type="date"  name="dod" value="<%= p.getDateOfDeath()%>" id="form6Example2" class="form-control" />
                                                 
                                             </div>
                                         </div>
@@ -108,41 +114,46 @@
 
                                     <!-- Text input -->
                                     <h3>Occupation:</h3><div class="form-outline mb-4">
-                                        <input type="text" id="form6Example3" class="form-control" />
+                                        <input type="text" name="occupation" value="<%= p.getOccupation()%>" id="form6Example3" class="form-control" />
                                         
                                     </div>
 
                                     <!-- Text input -->
                                     <h3>Address:</h3><div class="form-outline mb-4">
-                                        <input type="text" id="form6Example4" class="form-control" />
+                                        <input type="text" name="address" value="<%= p.getAddress()%>" id="form6Example4" class="form-control" />
                                        
                                     </div>
 
 
                                     <!-- Number input -->
                                     <h3>Phone number:</h3><div class="form-outline mb-4">
-                                        <input type="number" id="form6Example6" class="form-control" />
+                                        <input type="number" name="phonenumber" value="<%= p.getPhoneNumber()%>" id="form6Example6" class="form-control" />
                                     
                                     </div>
 
                                     <!-- Message input -->
                                     <h3>Description:</h3><div class="form-outline mb-4">
-                                        <textarea class="form-control" id="form6Example7" rows="4"></textarea>
+                                        <input type="text" name="description" value="<%= p.getDescription()%>" class="form-control" />
                                         
                                     </div>
-
+                                    
+                                        <input hidden type="text" name="genealogyID" value="<%= p.getGenealogyID()%>" class="form-control" />
+                                        <input hidden type="text" name="personID" value="<%= p.getID()%>" class="form-control" />
+                                    
+                                    </div>
 
 
                                     <!-- /.box-body -->
                                 </div>
                                 <!-- /.box -->
-
+                                <input type="submit" value="SAVE" />
                             </div>
 
 
                         </div> 
                     </div>
-                </div>  
+                    
+                </form>  
                 <script>
                     $(function () {
                         $('#profile-image1').on('click', function () {

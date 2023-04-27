@@ -52,22 +52,6 @@ public class PersonDAO extends DBContext {
 //
 //        return person;
 //    }
-    public int searchHeaderPersonID(String name) {
-        String sql = "SELECT ID FROM [Person] WHERE ParentID = 0 AND Fullname = ?";
-        int ID = 0;
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, name);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) { 
-                ID = rs.getInt("ID");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return ID;
-    }
-
     public void insert(Person p) {
         String sql = "INSERT INTO [dbo].[Person]\n"
                 + "           ([Fullname]\n"
@@ -99,9 +83,10 @@ public class PersonDAO extends DBContext {
 
     public static void main(String[] args) {
         PersonDAO c = new PersonDAO();
-        List<Person> list= c.getAll();
+        List<Person> list = c.findPersonby("Occupation", "sdvds");
+       
         System.out.println(list);
-        //System.out.println(c.searchHeaderPersonID("sadsa"));
+      
 
     }
 
@@ -113,7 +98,7 @@ public class PersonDAO extends DBContext {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                Person s = new Person(rs.getInt("ID") ,rs.getString("Fullname"), rs.getString("DateOfBirth"), rs.getString("DateOfDeath"), rs.getString("Occupation"), rs.getString("Address"), rs.getString("PhoneNumber"), rs.getString("Description"), rs.getInt("ParentID"), rs.getInt("GenealogyID"));
+                Person s = new Person(rs.getInt("ID"), rs.getString("Fullname"), rs.getString("DateOfBirth"), rs.getString("DateOfDeath"), rs.getString("Occupation"), rs.getString("Address"), rs.getString("PhoneNumber"), rs.getString("Description"), rs.getInt("ParentID"), rs.getInt("GenealogyID"));
                 list.add(s);
             }
         } catch (Exception e) {
@@ -122,16 +107,75 @@ public class PersonDAO extends DBContext {
         return list;
     }
 
+    public Person findPerson(int id) {
+        Person s = new Person();
+        String sql = "SELECT * FROM [Person] WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                s = new Person(rs.getInt("ID"), rs.getString("Fullname"), rs.getString("DateOfBirth"), rs.getString("DateOfDeath"), rs.getString("Occupation"), rs.getString("Address"), rs.getString("PhoneNumber"), rs.getString("Description"), rs.getInt("ParentID"), rs.getInt("GenealogyID"));
 
-    public void delete(int id){
-         String sql = "DELETE FROM Person WHERE ID = ?";
-         try {
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return s;
+    }
+
+    public List<Person> findPersonby(String option, String value) {
+        List<Person> list = new ArrayList<>();
+        String sql = "SELECT * FROM Person WHERE " + option + " LIKE ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + value + "%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Person s = new Person(rs.getInt("ID"), rs.getString("Fullname"), rs.getString("DateOfBirth"), rs.getString("DateOfDeath"), rs.getString("Occupation"), rs.getString("Address"), rs.getString("PhoneNumber"), rs.getString("Description"));
+                list.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM Person WHERE ID = ?";
+        try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e) {
-             System.out.println(e);
+            System.out.println(e);
         }
     }
-    
+
+    public void update(Person p) {
+        String sql = "UPDATE [dbo].[Person]\n"
+                + "   SET [Fullname] = ?\n"
+                + "      ,[DateOfBirth] = ?\n"
+                + "      ,[DateOfDeath] = ?\n"
+                + "      ,[Occupation] = ?\n"
+                + "      ,[Address] = ?\n"
+                + "      ,[PhoneNumber] = ?\n"
+                + "      ,[Description] = ?\n"
+                + " WHERE ID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, p.getFullname());
+            st.setString(2, p.getDateOfBirth());
+            st.setString(3, p.getDateOfDeath());
+            st.setString(4, p.getOccupation());
+            st.setString(5, p.getAddress());
+            st.setString(6, p.getPhoneNumber());
+            st.setString(7, p.getDescription());
+            st.setInt(8, p.getID());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
 }

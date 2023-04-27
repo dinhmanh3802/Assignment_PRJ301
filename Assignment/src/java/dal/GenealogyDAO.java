@@ -1,4 +1,3 @@
-
 package dal;
 
 import java.sql.PreparedStatement;
@@ -25,7 +24,7 @@ public class GenealogyDAO extends DBContext {
                 Genealogy s = new Genealogy(rs.getInt("ID"), rs.getString("Genealogytitle"));
                 list.add(s);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
@@ -40,7 +39,7 @@ public class GenealogyDAO extends DBContext {
             st.setString(1, genealogytitle);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                genealogy = new Genealogy(rs.getString("Genealogytitle"));
+                genealogy = new Genealogy(rs.getInt("ID"),rs.getString("Genealogytitle"));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -48,38 +47,35 @@ public class GenealogyDAO extends DBContext {
         return genealogy;
     }
 
-
-    public void insert(Genealogy u) {
+    public void insert(String name) {
         String sql = "INSERT INTO [dbo].[Genealogy]\n"
-                + "           ([Genealogytitle] VALUES (?)";
+                + "           ([GenealogyTitle])\n"
+                + "     VALUES\n"
+                + "           (?)"
+                ;
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-
-            st.setString(1, u.getGenealogyTitle());
-    
+            st.setString(1, name);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
-    
     public static void main(String[] args) {
-        GenealogyDAO c = new GenealogyDAO();
-        Genealogy u = new Genealogy("TEN");
-        c.insert(u);
+        GenealogyDAO g = new GenealogyDAO();
+        System.out.println(g.getGenealogyByGenealogytitle("123").getID());
     }
 
-    public void delete(int id){
-         String sql = "DELETE FROM Genealogy WHERE ID = ?";
-         try {
+    public void delete(int id) {
+        String sql = "DELETE FROM Genealogy WHERE ID = ?";
+        try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e) {
-             System.out.println(e);
+            System.out.println(e);
         }
     }
 
 }
-
